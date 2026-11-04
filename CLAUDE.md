@@ -11,20 +11,28 @@ Track the roastery's operations:
 
 ## Users
 Internal only. Exactly two users: the owner and their business partner, both on Gmail accounts.
-No public access. Sign-in is with Google, and only an explicit allowlist of the two Gmail addresses gets in.
+No public access. Sign-in is with Google. Access is enforced by Google: the spreadsheet is shared only with the two Gmail accounts.
 
 ## Architecture (decided so far)
 - Front-end: a static site hosted on **GitHub Pages**
 - Database: **Google Sheets**
-- Authentication: Google sign-in. Details are not decided yet (see Open decisions).
-- A static site cannot hold secrets. Never commit API keys, client secrets or private sheet data to this repo.
-  An OAuth client ID is public by design and is fine to commit.
+- Authentication: **Google Identity Services (OAuth 2.0) in the browser**. The page calls the Google Sheets API
+  directly with the signed-in user's access token. No backend and no Apps Script.
+  Reason: Google enforces access through sheet sharing, there are no secrets to store, and there is nothing to host.
+- The repo is **public**, because GitHub Pages on the Free plan requires it. The code is public; the data is not.
+
+## Security rules
+- Never commit secrets, API keys with write power, or OAuth client secrets. The OAuth Client ID is public by design and is fine.
+- Never commit real business data, Gmail addresses or the spreadsheet ID. Test and sample data must be made up.
+  The spreadsheet ID is entered in the app and stored in the browser (localStorage).
+- Keep access tokens in memory only, never in localStorage.
+- Keep third-party scripts to a minimum and use a strict Content Security Policy (XSS is the main risk).
 
 ## Branding
 Graphics and branding assets will be provided later. Until then, use neutral placeholder styling.
 
 ## Open decisions
-- Auth and data-access approach: Google OAuth in the browser with direct Sheets API access, or Google Apps Script as the API layer
+- OAuth scope: `drive.file` (only the app's sheet, no unverified-app warning; preferred) or `spreadsheets` (simpler, all sheets)
 - Sheet structure (tabs and columns) for beans, roasts, sales and invoices
 - Front-end stack (plain HTML/JS or a framework built to static files)
 
@@ -38,4 +46,5 @@ Graphics and branding assets will be provided later. Until then, use neutral pla
 - Commit and push work regularly. Sessions are temporary and unpushed work is lost.
 
 ## Status
-- Repository created with CLAUDE.md and README. No code yet. Next: decide the auth approach.
+- Auth approach decided. No code yet. Next: design the sheet structure.
+- Before real data goes in: both users must have 2-Step Verification on their Gmail accounts.
