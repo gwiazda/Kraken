@@ -46,5 +46,11 @@ Graphics and branding assets will be provided later. Until then, use neutral pla
 - Commit and push work regularly. Sessions are temporary and unpushed work is lost.
 
 ## Status
-- Auth approach decided. No code yet. Next: design the sheet structure.
+- Done: repo created (public), auth approach decided, user set up VS Code with the repo cloned and auto-fetch on.
+- Next 1: user confirms the working process, then Claude opens the first PR recording it in this file:
+  branch -> PR -> CI checks -> reviewer agents (code review) -> user reviews and merges. No direct pushes to `main` after that.
+- Next 2: design the sheet structure. Questions asked, awaiting answers: data per green-bean lot; roast green-in vs
+  roasted-out and blends; products/bag sizes and customer types; invoices issued elsewhere or only tracked;
+  currency (PLN?) and UI language (Polish/English).
+- User's optional setup: `main` ruleset (require PR, block force push), GitHub Pull Requests extension in VS Code.
 - Before real data goes in: both users must have 2-Step Verification on their Gmail accounts.
