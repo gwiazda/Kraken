@@ -45,10 +45,15 @@ Record every delivery of green (unroasted) coffee and know how much is left.
 
 **[P]** Bag sizes are a configurable list (a "Bag sizes" tab), not hard-coded.
 **[P]** Packing is recorded as an event: "on <date>, from roast(s) X, packed N bags of size S of coffee C".
-**[P]** Bag stock per coffee and size = packed − bags sold or invoiced − other stock-outs (samples, own use, damaged).
+**[R] Out of scope:** web shop sales (krakshop.pl) and cash register sales are **not** recorded in Kraken.
+Only invoice requests are (section 4).
 
-- **[Q]** Is every sale covered by an invoice request (section 4), or are there also sales without one
-  (for example web shop orders on krakshop.pl, or market sales)? This decides how bag stock goes down.
+Because those sales are not recorded, Kraken cannot work out bag stock as "packed − sold".
+- **[Q]** How should bag stock be kept? Options:
+  (a) **stock count:** you enter the current number of bags per coffee and size whenever you count, and
+  Kraken shows the latest count, its date, and bags packed or invoiced since then;
+  (b) **quick stock-out entries:** a fast "−N bags" button for shop or register sales, without storing order details;
+  (c) **no bag stock for now.**
 - **[Q]** Is it enough to track roasted coffee only as packed bags, or do you also want "roasted but not yet packed" stock (kg)?
 
 ---
@@ -109,8 +114,10 @@ so JSON is the better source.
   - Line: coffee, bag size, number of bags, unit price (pre-filled from the price list, editable).
 - Status: `To issue` → `Issued` (with the invoice number and date issued). **[Q]** Do you also want `Paid`?
 - Totals net / VAT / gross calculated by the app.
-- **[P]** The invoice itself is still issued in your invoicing software. Kraken only tracks the request.
-  **[Q]** Which software do you use (for example Fakturownia, inFakt, wFirma)? Some have an API, so issuing could be automated later.
+- **[R]** Invoices are issued in **Fakturownia.pl**. Kraken only tracks the request and its status.
+- **[P] Later, optional:** Fakturownia has an API. Kraken could then create a draft invoice in Fakturownia
+  from a request with one click, and fill in the invoice number automatically. Not in the first version.
+  It would need a Fakturownia API token, which must never be committed (see `CLAUDE.md`).
 
 ---
 
@@ -128,7 +135,9 @@ Flexible enough to generate prices for any discount.
 - **Discount presets:** a short list (for example 10%, 15%, 20%) as quick buttons. B2B 15% is the current standard.
 - **Special prices (optional):** a per-contractor override for a specific coffee and size, for negotiated deals.
 - **Price history:** when prices change, the old ones are kept, so past invoice requests still show the price that applied then.
-- **[Q]** Is the discount applied to the net or the gross price? Should results be rounded (for example to 0.50 or 1.00 PLN)?
+- **[R]** Discounts are taken off the **retail price**.
+  (A percentage discount gives the same result whether it is applied to net or gross; only rounding can differ.)
+- **[Q]** Should discounted prices be rounded (for example to 0.01, 0.50 or 1.00 PLN), and is the rounding done on the gross price?
 
 ---
 
@@ -158,15 +167,15 @@ Flexible enough to generate prices for any discount.
 
 **[P] Make it flexible**
 - Packaging, labels, VAT rate and markups (2×, 2.5×, 3×) are **settings**, not fixed columns, so they can change.
+- **[R]** Packaging and label costs must be **easy to add and change** in the app, per bag size.
+  The 1 kg costs are not known yet; until they are entered, the 1 kg calculation shows "missing cost" instead of a wrong number.
 - Calculate for **every bag size** in the size list, not only 250 g and 1 kg (packaging and label cost per size).
 - Optionally include other costs per kg: roasting energy, gas, overhead.
 - Final prices chosen here become the **retail price list** in section 5 (one source of truth).
 
 **[Q] Questions**
-- What are the packaging and label costs for **1 kg** bags? The brief lists them only for 250 g.
 - Does "Koszt wypalenia 250g ziarna" mean only the bean cost of 250 g roasted coffee, or should it include roasting costs (energy)?
 - VAT rate to use for coffee? It will be a setting either way.
-- Is the B2B price 15% off the net or the gross price?
 
 ---
 
