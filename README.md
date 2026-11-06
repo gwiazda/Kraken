@@ -9,7 +9,7 @@ Only the two owners have access to the data.
 ## Run locally
 ```sh
 npm install     # once
-npm run dev     # then open http://localhost:5173/kraken/
+npm run dev     # then open http://localhost:5173/
 ```
 
 See `CLAUDE.md` for the architecture and decisions, `docs/REQUIREMENTS.md` for the requirements and `STATUS.md` for current work.
