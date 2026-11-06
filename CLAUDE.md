@@ -29,7 +29,9 @@ No public access. Sign-in is with Google. Access is enforced by Google: the spre
 - Keep third-party scripts to a minimum and use a strict Content Security Policy (XSS is the main risk).
 
 ## Branding
-Graphics and branding assets will be provided later. Until then, use neutral placeholder styling.
+Brand assets are in **`assets/brand/`**. Read `assets/brand/README.md` before any UI work: it lists the logos,
+colours (lime `#CAD401`, yellow `#F3E838`, black) and fonts. Use the provided logos as they are; never redraw them.
+The label font (Erbaum) is commercial: never commit its font files without a web licence.
 
 ## Open decisions
 - OAuth scope: `drive.file` (only the app's sheet, no unverified-app warning; preferred) or `spreadsheets` (simpler, all sheets)
