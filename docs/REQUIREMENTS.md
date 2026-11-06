@@ -88,9 +88,17 @@ Known JSON fields (from the community tool `jglogan/roastime-data`) that map to 
 | Notes | comments field | **name not yet confirmed**, needs a real file |
 | (extra, optional) | `roastNumber`, `uid`, `totalRoastTime`, `beanChargeTemperature`, `beanDropTemperature`, `indexFirstCrackStart`, `sampleRate` | `uid` lets us skip duplicates on re-import |
 
-Roast World also offers a **CSV** export (it has a header block with the bean name and green
-weight, then a per-second temperature log). It does not appear to contain the roasted weight,
-so JSON is the better source.
+**Ways to get the data out** (from forum posts, some years old; menus may have changed):
+- **Roast World web (roast.world), single roast:** the roast's actions menu offers an export as **JSON**,
+  and later posts also mention a **CSV** option.
+- **The Roast World CSV** has a header block (bean name, green weight, date) and then a per-second
+  temperature log. It does not appear to contain the roasted weight, so JSON is the better source.
+- **The RoasTime desktop app** keeps every roast as a JSON file in the folder above. That gives
+  **all roasts in bulk** without exporting one by one.
+- No official bulk "roast history to CSV" export was found; it is a long-standing feature request.
+
+**[P]** The import reads RoasTime/Roast World **JSON** files, many at once. The simplest bulk path is to
+select all files in the local `roasts` folder.
 
 **[P] Import design**
 - Accept one or many RoasTime `.json` files at once (drag and drop).
@@ -137,7 +145,9 @@ Flexible enough to generate prices for any discount.
 - **Price history:** when prices change, the old ones are kept, so past invoice requests still show the price that applied then.
 - **[R]** Discounts are taken off the **retail price**.
   (A percentage discount gives the same result whether it is applied to net or gross; only rounding can differ.)
-- **[Q]** Should discounted prices be rounded (for example to 0.01, 0.50 or 1.00 PLN), and is the rounding done on the gross price?
+- **[R]** No rounding: discounted prices are shown to the grosz (0.01 PLN).
+- **[R]** Every discounted price can be **overridden by hand**. An overridden price is clearly marked,
+  and can be reset to the calculated value.
 
 ---
 
@@ -170,11 +180,13 @@ Flexible enough to generate prices for any discount.
 - **[R]** Packaging and label costs must be **easy to add and change** in the app, per bag size.
   The 1 kg costs are not known yet; until they are entered, the 1 kg calculation shows "missing cost" instead of a wrong number.
 - Calculate for **every bag size** in the size list, not only 250 g and 1 kg (packaging and label cost per size).
-- Optionally include other costs per kg: roasting energy, gas, overhead.
+- **[R]** The cost of a bag must include **all costs that make up the bag** (beans after roast loss,
+  packaging, labels, and any other per-bag item such as a valve or stamp). Other per-bag costs can be
+  added as extra lines per bag size.
+- **[R]** Energy is **not** included as a separate cost (too hard to measure).
 - Final prices chosen here become the **retail price list** in section 5 (one source of truth).
 
 **[Q] Questions**
-- Does "Koszt wypalenia 250g ziarna" mean only the bean cost of 250 g roasted coffee, or should it include roasting costs (energy)?
 - VAT rate to use for coffee? It will be a setting either way.
 
 ---
