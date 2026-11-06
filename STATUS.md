@@ -1,6 +1,6 @@
 # Status
 
-_Last updated: 2026-11-06 (first local VS Code session)_
+_Last updated: 2026-11-06 (end of the first local VS Code session)_
 
 Snapshot of where work stopped. Rewritten at the end of each session; see `CLAUDE.md` for lasting decisions.
 
@@ -15,14 +15,15 @@ Snapshot of where work stopped. Rewritten at the end of each session; see `CLAUD
   at https://gwiazda.github.io/kraken/.
 
 ## In progress
-- Nothing in progress.
+- PR #8 (address docs + testing rule + this status) waiting for the owner to merge.
 
 ## Next steps
 1. Google Cloud setup with the owner, step by step: project, Sheets API, Drive API, Picker API, OAuth consent screen
    (Testing mode, both Gmail accounts as test users), OAuth Client ID (web) with JavaScript origins
    `http://localhost:5173` and `https://gwiazda.github.io`, Picker API key restricted to those origins.
 2. Owner confirms the sheet design in REQUIREMENTS section 7.
-3. Build: sign-in and sheet connection (create sheet / pick with Picker), then green coffee lots,
+3. Add Vitest and run tests in CI together with the first piece of logic (testing rule in `CLAUDE.md`).
+4. Build: sign-in and sheet connection (create sheet / pick with Picker), then green coffee lots,
    then the roasting log and RoasTime import.
 
 ## Open questions for the owners
