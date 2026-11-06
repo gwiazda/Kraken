@@ -78,15 +78,23 @@ The Bullet is used with Aillio's **RoasTime** software, which stores one **JSON 
 Locally they are in `~/Library/Application Support/roast-time/roasts/` (macOS) or
 `%APPDATA%\roast-time\roasts\` (Windows). Roasts can also be exported as JSON from Roast World.
 
-Known JSON fields (from the community tool `jglogan/roastime-data`) that map to our fields:
+**Confirmed from two real roast files (RoasTime 4, Bullet R2 PRO, 2026-11-06).** Each file in
+`roast-time/roasts/` is JSON with no file extension, named by the roast's `uid`, about 100–130 KB
+(mostly per-second temperature curves). Fields Kraken uses:
 | Kraken field | RoasTime JSON field | Notes |
 |---|---|---|
-| Roast date | `dateTime` | Unix time in **milliseconds** |
-| Coffee | `roastName`, `beanId` | `beanId` points to RoasTime's own bean library; the name may need mapping to our lot |
-| Weight before (g) | `weightGreen` | grams |
-| Weight after (g) | `weightRoasted` | grams; may be empty if not entered in RoasTime |
-| Notes | comments field | **name not yet confirmed**, needs a real file |
-| (extra, optional) | `roastNumber`, `uid`, `totalRoastTime`, `beanChargeTemperature`, `beanDropTemperature`, `indexFirstCrackStart`, `sampleRate` | `uid` lets us skip duplicates on re-import |
+| Roast date and time | `dateTime` | Unix time in **milliseconds**, UTC. Show in local time (Europe/Warsaw); a late-night roast can fall on the next calendar day |
+| Coffee | `beanId` (+ `roastName`) | `beanId` points to a file in `roast-time/beans/`. `roastName` looks like `"Gwatemala 09.10.2026-8"` |
+| Weight before (g) | `weightGreen` | grams, for example `1200` |
+| Weight after (g) | `weightRoasted` | grams, for example `1026` |
+| Notes | **none found** | Neither sample has a notes field. Kraken keeps its own Notes column |
+| Duplicate check | `uid` | unique per roast |
+| Change check | `updatedAt` | ms timestamp; changes when the roast is edited in RoasTime |
+| Optional extras | `roastNumber`, `totalRoastTime` (s), `beanChargeTemperature`, `beanDropTemperature`, `indexFirstCrackStart`, `sampleRate` | stored only if useful later |
+
+Kraken stores only these summary fields, never the temperature curves.
+`roast-time/db.sqlite3` also exists, but its structure is undocumented and reading it in the browser
+would need a large extra library, so Kraken reads the JSON files instead (same data).
 
 **Ways to get the data out** (from forum posts, some years old; menus may have changed):
 - **Roast World web (roast.world), single roast:** the roast's actions menu offers an export as **JSON**,
@@ -97,16 +105,23 @@ Known JSON fields (from the community tool `jglogan/roastime-data`) that map to 
   **all roasts in bulk** without exporting one by one.
 - No official bulk "roast history to CSV" export was found; it is a long-standing feature request.
 
-**[P]** The import reads RoasTime/Roast World **JSON** files, many at once. The simplest bulk path is to
-select all files in the local `roasts` folder.
-
-**[P] Import design**
-- Accept one or many RoasTime `.json` files at once (drag and drop).
-- Also accept a simple CSV with our five columns, for the existing history.
-- Show a preview before saving: for each roast, match it to a green lot (remember the mapping
-  RoasTime name → lot for next time), flag missing roasted weight, skip roasts already imported (by `uid`).
-- **[Q] Needed:** please send 1–2 real roast files from your RoasTime (and the CSV if you use it),
-  so the importer is built against real data, not guesses.
+**[P] Import design: "Sync roasts" button**
+- **Chrome or Edge (best):** the first time, you pick the `roast-time/roasts` folder and the browser
+  remembers it. After that, **Sync roasts** re-reads the whole folder in one click (the browser asks
+  "allow viewing files?" once per visit).
+- **Safari or Firefox:** they cannot remember a folder, so **Import roasts** opens a folder picker each
+  time. Pin the `roasts` folder in the Finder sidebar so it is two clicks.
+- Each sync reads **all** roast files and then:
+  - adds roasts whose `uid` is not in Kraken yet;
+  - updates roasts whose `updatedAt` changed (for example, roasted weight entered later), after showing what changes;
+  - never deletes roasts from Kraken, even if a file is gone from the folder;
+  - leaves Kraken-only fields (notes, lot link) untouched.
+- **Coffee matching:** the first time a RoasTime `beanId` appears, you pick which green lot it is.
+  Kraken remembers that, so later syncs match automatically. Unmatched roasts are listed for you to assign.
+- Show a summary before saving: N new, N updated, N unchanged, N needing a lot, N missing roasted weight.
+- Also accept a simple CSV with our five columns, for older roast history kept elsewhere.
+- Files are read in the browser only; nothing is uploaded anywhere except the summary rows written to the Google Sheet.
+- **[Q]** Do you write notes on roasts in RoasTime? If so, send one roast that has a note, so its field name is known.
 
 ---
 
