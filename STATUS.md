@@ -10,11 +10,12 @@ Snapshot of where work stopped. Rewritten at the end of each session; see `CLAUD
 - Owner's Mac set up for local work: VS Code + Claude Code, git identity, Homebrew, Node.js, GitHub CLI signed in
   (push works). Repo is at `~/IdeaProjects/Kraken/kraken`.
 - Decided: TypeScript + Vite (no framework); OAuth scope `drive.file`; working process recorded in `CLAUDE.md`.
-- PR "Set up TypeScript + Vite": placeholder branded page, CI workflow, GitHub Pages deploy workflow.
+- TypeScript + Vite setup merged (PRs #6, #7): placeholder branded page, CI workflow, GitHub Pages deploy workflow.
+- Repo renamed from `Kraken` to `kraken`. GitHub Pages is on (Source: GitHub Actions) and the placeholder page is live
+  at https://gwiazda.github.io/kraken/.
 
 ## In progress
-- Owner to merge the Vite setup PR, then turn on GitHub Pages: repo **Settings → Pages → Source: GitHub Actions**.
-  Then check that `https://gwiazda.github.io/Kraken/` shows the placeholder page.
+- Nothing in progress.
 
 ## Next steps
 1. Google Cloud setup with the owner, step by step: project, Sheets API, Drive API, Picker API, OAuth consent screen
