@@ -87,7 +87,7 @@ Locally they are in `~/Library/Application Support/roast-time/roasts/` (macOS) o
 | Coffee | `beanId` (+ `roastName`) | `beanId` points to a file in `roast-time/beans/`. `roastName` looks like `"Gwatemala 09.10.2026-8"` |
 | Weight before (g) | `weightGreen` | grams, for example `1200` |
 | Weight after (g) | `weightRoasted` | grams, for example `1026` |
-| Notes | **none found** | Neither sample has a notes field. Kraken keeps its own Notes column |
+| Notes | **not in the samples** | The partner (who roasts) sometimes writes notes in RoasTime; field name to be confirmed from a roast that has one |
 | Duplicate check | `uid` | unique per roast |
 | Change check | `updatedAt` | ms timestamp; changes when the roast is edited in RoasTime |
 | Optional extras | `roastNumber`, `totalRoastTime` (s), `beanChargeTemperature`, `beanDropTemperature`, `indexFirstCrackStart`, `sampleRate` | stored only if useful later |
@@ -106,11 +106,16 @@ would need a large extra library, so Kraken reads the JSON files instead (same d
 - No official bulk "roast history to CSV" export was found; it is a long-standing feature request.
 
 **[P] Import design: "Sync roasts" button**
-- **Chrome or Edge (best):** the first time, you pick the `roast-time/roasts` folder and the browser
-  remembers it. After that, **Sync roasts** re-reads the whole folder in one click (the browser asks
-  "allow viewing files?" once per visit).
-- **Safari or Firefox:** they cannot remember a folder, so **Import roasts** opens a folder picker each
-  time. Pin the `roasts` folder in the Finder sidebar so it is two clicks.
+- **[R] Both owners use it the same way**, each on their own computer, with **Chrome**.
+- **[R] Each person sets up their folder once**; after that, syncing needs no picking.
+  - The first time, you pick the `roast-time/roasts` folder. Chrome remembers it in that browser.
+  - Chrome can grant "allow on every visit"; then Kraken **syncs automatically when opened**.
+    Otherwise Chrome asks "allow viewing files?" once per visit and **Sync roasts** is one click.
+  - Browsers do not let a web page open a folder from a typed path, so the folder cannot be stored in the
+    Google Sheet and reused on another computer. Each person picks it once on their own computer.
+  - **[P]** The sheet records **when each person last synced** and how many roasts were found, so both can
+    see whether Kraken is up to date (for example, "Last sync: partner, 2 hours ago, 3 new roasts").
+- Safari and Firefox are not supported for syncing (they cannot remember folders). Manual entry works in any browser.
 - Each sync reads **all** roast files and then:
   - adds roasts whose `uid` is not in Kraken yet;
   - updates roasts whose `updatedAt` changed (for example, roasted weight entered later), after showing what changes;
@@ -121,7 +126,8 @@ would need a large extra library, so Kraken reads the JSON files instead (same d
 - Show a summary before saving: N new, N updated, N unchanged, N needing a lot, N missing roasted weight.
 - Also accept a simple CSV with our five columns, for older roast history kept elsewhere.
 - Files are read in the browser only; nothing is uploaded anywhere except the summary rows written to the Google Sheet.
-- **[Q]** Do you write notes on roasts in RoasTime? If so, send one roast that has a note, so its field name is known.
+- **[R] Notes:** keep a Notes column. Import RoasTime notes when present, and allow adding or editing notes in Kraken.
+- **[Q]** Send one roast file that has a note written in RoasTime, so its field name is known. Not urgent.
 
 ---
 
@@ -135,7 +141,8 @@ would need a large extra library, so Kraken reads the JSON files instead (same d
 - One invoice request = header + one or more line items (an order often has several coffees and sizes).
   - Header: date, customer (from the contractor list, section 5), discount, status, notes, created by.
   - Line: coffee, bag size, number of bags, unit price (pre-filled from the price list, editable).
-- Status: `To issue` → `Issued` (with the invoice number and date issued). **[Q]** Do you also want `Paid`?
+- **[R] Status:** `To issue` → `Issued` (with the invoice number and date issued) → `Paid`.
+  Payment is tracked in Fakturownia today, so `Paid` is optional to use; it becomes useful once Kraken connects to the Fakturownia API.
 - Totals net / VAT / gross calculated by the app.
 - **[R]** Invoices are issued in **Fakturownia.pl**. Kraken only tracks the request and its status.
 - **[P] Later, optional:** Fakturownia has an API. Kraken could then create a draft invoice in Fakturownia
@@ -191,6 +198,7 @@ Flexible enough to generate prices for any discount.
 | 23–24 | B2B 15% price (250 g / 1 kg) | B2b 15% (250g / 1kg) | = final price × 0.85 |
 
 **[P] Make it flexible**
+- **[R]** VAT rate is **23%** (default setting, editable).
 - Packaging, labels, VAT rate and markups (2×, 2.5×, 3×) are **settings**, not fixed columns, so they can change.
 - **[R]** Packaging and label costs must be **easy to add and change** in the app, per bag size.
   The 1 kg costs are not known yet; until they are entered, the 1 kg calculation shows "missing cost" instead of a wrong number.
@@ -200,9 +208,6 @@ Flexible enough to generate prices for any discount.
   added as extra lines per bag size.
 - **[R]** Energy is **not** included as a separate cost (too hard to measure).
 - Final prices chosen here become the **retail price list** in section 5 (one source of truth).
-
-**[Q] Questions**
-- VAT rate to use for coffee? It will be a setting either way.
 
 ---
 
