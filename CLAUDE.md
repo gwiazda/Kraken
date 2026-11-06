@@ -44,13 +44,15 @@ Graphics and branding assets will be provided later. Until then, use neutral pla
 - Keep this file concise. Replace outdated information instead of appending to it.
 - Ask before changing how data is read from or written to Google Sheets, or how authentication works.
 - Commit and push work regularly. Sessions are temporary and unpushed work is lost.
+- `main` is protected: never push to it. Every change goes on a branch and through a pull request
+  that the user reviews and merges.
 
-## Status
-- Done: repo created (public), auth approach decided, user set up VS Code with the repo cloned and auto-fetch on.
-- Next 1: user confirms the working process, then Claude opens the first PR recording it in this file:
-  branch -> PR -> CI checks -> reviewer agents (code review) -> user reviews and merges. No direct pushes to `main` after that.
-- Next 2: design the sheet structure. Questions asked, awaiting answers: data per green-bean lot; roast green-in vs
-  roasted-out and blends; products/bag sizes and customer types; invoices issued elsewhere or only tracked;
-  currency (PLN?) and UI language (Polish/English).
-- User's optional setup: `main` ruleset (require PR, block force push), GitHub Pull Requests extension in VS Code.
-- Before real data goes in: both users must have 2-Step Verification on their Gmail accounts.
+## Session status: `STATUS.md`
+This file holds only lasting project knowledge. The current state of work (what was done last,
+what is in progress, next steps, open questions) lives in **`STATUS.md`**.
+- At the start of every session, read `STATUS.md` to pick up where the last session stopped.
+- When the user ends a session ("Let's call it a day", "that's all for today", "koniec na dziś"
+  or similar), rewrite `STATUS.md` with the current situation, commit it and open (or update) a PR.
+  Tell the user it was saved and give the PR link.
+- `STATUS.md` is a snapshot: rewrite it each time instead of appending a log. Git history keeps old versions.
+- Lasting decisions still go in this file, not in `STATUS.md`.
