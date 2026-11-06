@@ -3,11 +3,18 @@
 Internal management system for **Krak Coffee Roastery**. Kraken is the app name.
 
 ## Purpose
-Track the roastery's operations:
-- Green (unroasted) coffee bean inventory: what is in stock and how much
-- Roasting: how much has been roasted, from which beans
-- Sales: what has been sold
-- Invoices: invoices still to be issued, and their status
+Track the roastery's operations: green coffee inventory, roasting log (manual entry and import from the
+Aillio Bullet R2 PRO), packed bag stock, invoice requests, contractor price lists and the cost calculation
+that sets retail prices.
+
+**Full requirements: `docs/REQUIREMENTS.md`.** Read it before building any feature. When the owners add or
+change a requirement, update that file in the same PR. Items marked [P] are proposals and [Q] are open questions:
+do not treat them as decided until the owner confirms.
+
+## Language
+- The app (UI, code, data column names, docs) is in **English**.
+- When the owners write or paste Polish, translate it to English. Keep Polish proper names
+  (such as coffee names on the labels) as they are.
 
 ## Users
 Internal only. Exactly two users: the owner and their business partner, both on Gmail accounts.
@@ -35,7 +42,7 @@ The label font (Erbaum) is commercial: never commit its font files without a web
 
 ## Open decisions
 - OAuth scope: `drive.file` (only the app's sheet, no unverified-app warning; preferred) or `spreadsheets` (simpler, all sheets)
-- Sheet structure (tabs and columns) for beans, roasts, sales and invoices
+- Sheet structure and schema-change approach: proposal in `docs/REQUIREMENTS.md` section 7, awaiting confirmation
 - Front-end stack (plain HTML/JS or a framework built to static files)
 
 ## Rules for Claude
