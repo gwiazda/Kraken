@@ -9,7 +9,8 @@ Snapshot of where work stopped. Rewritten at the end of each session; see `CLAUD
 - Requirements written in `docs/REQUIREMENTS.md` (PR #4), including the owners' answers so far:
   English UI; web-shop and register sales out of scope; Fakturownia for invoices (statuses To issue / Issued / Paid);
   discounts off retail price, no rounding, manual override; bag cost = all per-bag costs, no energy; VAT 23%;
-  RoasTime roast file format confirmed from real files; "Sync roasts" per user in Chrome.
+  RoasTime roast file format confirmed from real files; "Sync roasts" per user in Chrome;
+  no bag stock in the first version.
 
 ## In progress
 - Owner is moving development to **VS Code with the Claude Code extension on the Mac**; cloud sessions stay for iPhone use.
@@ -24,8 +25,6 @@ Snapshot of where work stopped. Rewritten at the end of each session; see `CLAUD
    - Confirm the sheet design in REQUIREMENTS section 7
 
 ## Open questions for the owners
-- Bag stock: (a) stock count, (b) quick stock-out entries, (c) none for now. (REQUIREMENTS section 2)
-- Roasted-but-not-packed stock in kg: needed?
 - A RoasTime roast file that contains a note (to learn the notes field name). Not urgent.
 
 ## Reminders

@@ -39,22 +39,22 @@ Record every delivery of green (unroasted) coffee and know how much is left.
 
 ---
 
-## 2. Roasted coffee and bag inventory
+## 2. Bag sizes (bag stock deferred)
 
-**[R]** Track how many packed bags we have. Sizes: **250 g** and **1 kg** for now, but other sizes must be possible.
+**[R] Bag sizes:** **250 g** and **1 kg** for now, but other sizes must be possible.
+**[P]** Bag sizes are a configurable list (a "Bag sizes" tab), not hard-coded. They are used by invoice
+requests (section 4), price lists (section 5) and the cost calculation (section 6).
 
-**[P]** Bag sizes are a configurable list (a "Bag sizes" tab), not hard-coded.
-**[P]** Packing is recorded as an event: "on <date>, from roast(s) X, packed N bags of size S of coffee C".
 **[R] Out of scope:** web shop sales (krakshop.pl) and cash register sales are **not** recorded in Kraken.
 Only invoice requests are (section 4).
 
-Because those sales are not recorded, Kraken cannot work out bag stock as "packed − sold".
-- **[Q]** How should bag stock be kept? Options:
-  (a) **stock count:** you enter the current number of bags per coffee and size whenever you count, and
-  Kraken shows the latest count, its date, and bags packed or invoiced since then;
-  (b) **quick stock-out entries:** a fast "−N bags" button for shop or register sales, without storing order details;
-  (c) **no bag stock for now.**
-- **[Q]** Is it enough to track roasted coffee only as packed bags, or do you also want "roasted but not yet packed" stock (kg)?
+**[R] Decision (2026-11-06): no bag stock in the first version.** Kraken does not track how many packed
+bags are on the shelf, because most sales are not recorded in it and the number would be wrong.
+It tracks green coffee, roasts, invoice requests and prices.
+
+**Possible later:** a stock count (enter the current number of bags per coffee and size when you count;
+Kraken shows that count plus bags invoiced since), or quick "−N bags" stock-out entries.
+Keep the data design open for this: the Bag sizes list and invoice lines already give what it would need.
 
 ---
 

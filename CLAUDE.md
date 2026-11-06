@@ -4,7 +4,7 @@ Internal management system for **Krak Coffee Roastery**. Kraken is the app name.
 
 ## Purpose
 Track the roastery's operations: green coffee inventory, roasting log (manual entry and import from the
-Aillio Bullet R2 PRO), packed bag stock, invoice requests, contractor price lists and the cost calculation
+Aillio Bullet R2 PRO), invoice requests, contractor price lists and the cost calculation
 that sets retail prices.
 
 **Full requirements: `docs/REQUIREMENTS.md`.** Read it before building any feature. When the owners add or
