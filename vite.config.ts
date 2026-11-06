@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  // Relative links: the site works at https://gwiazda.github.io/Kraken/ whatever the letter case of the address.
+  // Relative links, so the built site works at https://gwiazda.github.io/kraken/ and in any folder.
   base: './',
   server: {
     // Fixed address: it must match the "Authorized JavaScript origins" of the Google OAuth client.

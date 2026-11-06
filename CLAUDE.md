@@ -33,7 +33,7 @@ No public access. Sign-in is with Google. Access is enforced by Google: the spre
 - OAuth scope (decided 2026-11-06): **`drive.file`**. Reason: least access, Kraken sees only its own sheet.
   Each user opens the shared sheet once through the Google Picker (needs a Picker API key restricted to the Picker API
   and the site's origins; such a key is public by design and may be committed).
-- Published at `https://gwiazda.github.io/Kraken/` (capital K, the repo name). Vite `base: './'` (relative links) so letter case does not matter. The CSP is a `<meta>` tag in `index.html`.
+- Published at `https://gwiazda.github.io/kraken/` (the address follows the repo name, `gwiazda/kraken`). Vite `base: './'` (relative links). The CSP is a `<meta>` tag in `index.html`.
 
 ## Commands
 - `npm install`: once after cloning, and after `package.json` changes.
@@ -44,6 +44,15 @@ No public access. Sign-in is with Google. Access is enforced by Google: the spre
 Branch `claude/<topic>` → PR → CI (`.github/workflows/ci.yml`: type check + build) must pass →
 Claude reviews its own diff (code-review) before asking the owner → owner tests locally if the PR says so, then merges →
 `.github/workflows/deploy.yml` publishes `main` to GitHub Pages.
+
+## Testing (owner's rule, 2026-11-06)
+**Every calculation and every data operation must have automated tests**, so later changes can't silently break them.
+- Covered: all calculations (stock, roast loss, costs, prices, discounts, VAT, totals), and adding, editing,
+  deleting (soft-delete) and importing records (RoasTime import, CSV), including reading and writing rows by header name and migrations.
+- Tool: **Vitest** (made for Vite). Add it with the first piece of logic, plus `npm test`, and run it in CI so a PR can't merge with failing tests.
+- Keep logic in plain functions separate from the UI and from the Google API, so it can be tested without a browser or network
+  (Sheets calls are faked in tests). Use made-up test data only.
+- A bug fix comes with a test that would have caught it. Never delete or weaken a test to make it pass without the owner's OK.
 
 ## Security rules
 - Never commit secrets, API keys with write power, or OAuth client secrets. The OAuth Client ID is public by design and is fine.
@@ -60,6 +69,8 @@ The label font (Erbaum) is commercial: never commit its font files without a web
 ## Working with the owner
 - The owner is not a developer. Give step-by-step instructions with exact clicks and commands, and explain
   what each PR changes in plain language.
+- **One step at a time:** give one action per message and wait for the owner's "done" before the next. Answer only what
+  was asked; if you spot a problem, explain it and ask before fixing it. Never push or open a PR the owner didn't agree to.
 - The owner prefers accuracy over speed: check things rather than guess, and say clearly when something is unverified.
 - The owner reviews and merges PRs in VS Code (GitHub Pull Requests extension) or GitHub Mobile.
 - Setup: MacBook, Chrome, VS Code with the official Claude Code extension, repo cloned at `~/IdeaProjects/Kraken/kraken`.
