@@ -1,0 +1,57 @@
+:root {
+  --lime: #cad401;
+  --yellow: #f3e838;
+  --black: #000000;
+  --white: #ffffff;
+  --grey: #9a9a9a;
+  /* Erbaum (label font) is commercial and not included; system fonts until a web licence exists. */
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font);
+  line-height: 1.5;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--lime);
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.app-name {
+  color: var(--lime);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.muted {
+  color: var(--grey);
+}

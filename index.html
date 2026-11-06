@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Strict Content Security Policy: only this site's own files may run.
+         Google sign-in and Sheets addresses will be added here when that feature is built. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Kraken</title>
+    <link rel="icon" type="image/png" href="./assets/brand/logo-stacked-lime.png" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <img class="logo" src="./assets/brand/logo-horizontal-lime-on-black.png" alt="Krak Coffee Roasters" />
+      <span class="app-name">Kraken</span>
+    </header>
+    <main id="app"></main>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
