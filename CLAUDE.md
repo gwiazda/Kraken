@@ -40,6 +40,16 @@ Brand assets are in **`assets/brand/`**. Read `assets/brand/README.md` before an
 colours (lime `#CAD401`, yellow `#F3E838`, black) and fonts. Use the provided logos as they are; never redraw them.
 The label font (Erbaum) is commercial: never commit its font files without a web licence.
 
+## Working with the owner
+- The owner is not a developer. Give step-by-step instructions with exact clicks and commands, and explain
+  what each PR changes in plain language.
+- The owner prefers accuracy over speed: check things rather than guess, and say clearly when something is unverified.
+- The owner reviews and merges PRs in VS Code (GitHub Pull Requests extension) or GitHub Mobile.
+- Setup: MacBook, Chrome, VS Code with the official Claude Code extension, repo cloned at `~/Projects/kraken`.
+  The business partner also uses Chrome and does the roasting (RoasTime on his computer).
+- Cloud sessions (from the Claude iPhone app) can't use `gh pr create` (GitHub GraphQL is blocked there);
+  open PRs with the REST API instead: `gh api -X POST repos/gwiazda/kraken/pulls -f title=... -f head=... -f base=main -f body=...`.
+
 ## Open decisions
 - OAuth scope: `drive.file` (only the app's sheet, no unverified-app warning; preferred) or `spreadsheets` (simpler, all sheets)
 - Sheet structure and schema-change approach: proposal in `docs/REQUIREMENTS.md` section 7, awaiting confirmation

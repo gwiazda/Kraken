@@ -1,0 +1,23 @@
+{
+  "varietyIds": [],
+  "elevation": 0,
+  "country": "Example Country",
+  "createdByUserId": "EXAMPLEuser",
+  "hasBeenVerified": false,
+  "tagIds": [],
+  "available": false,
+  "description": "Made-up example bean.",
+  "tracking": "0",
+  "sales": "0",
+  "lot": "0",
+  "uid": "EXAMPLEbeanID0000001",
+  "ico": "0",
+  "vendorIds": ["EXAMPLEvendor"],
+  "name": "Example Coffee",
+  "farm": "",
+  "region": "",
+  "createdAt": { "_nanoseconds": 0, "_seconds": 1767225600 },
+  "roastCount": 3,
+  "userId": "EXAMPLEuser",
+  "updatedAt": 0
+}
