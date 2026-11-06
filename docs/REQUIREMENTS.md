@@ -84,7 +84,7 @@ Locally they are in `~/Library/Application Support/roast-time/roasts/` (macOS) o
 | Kraken field | RoasTime JSON field | Notes |
 |---|---|---|
 | Roast date and time | `dateTime` | Unix time in **milliseconds**, UTC. Show in local time (Europe/Warsaw); a late-night roast can fall on the next calendar day |
-| Coffee | `beanId` (+ `roastName`) | `beanId` points to a file in `roast-time/beans/`. `roastName` looks like `"Gwatemala 09.10.2026-8"` |
+| Coffee | `beanId` (+ `roastName`) | `beanId` points to a file in `roast-time/beans/`. `roastName` looks like `"<Coffee> <DD.MM.YYYY>-<batch>"`, for example `"Kenia 01.01.2026-3"` |
 | Weight before (g) | `weightGreen` | grams, for example `1200` |
 | Weight after (g) | `weightRoasted` | grams, for example `1026` |
 | Notes | **not in the samples** | The partner (who roasts) sometimes writes notes in RoasTime; field name to be confirmed from a roast that has one |
