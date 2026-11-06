@@ -33,11 +33,11 @@ No public access. Sign-in is with Google. Access is enforced by Google: the spre
 - OAuth scope (decided 2026-11-06): **`drive.file`**. Reason: least access, Kraken sees only its own sheet.
   Each user opens the shared sheet once through the Google Picker (needs a Picker API key restricted to the Picker API
   and the site's origins; such a key is public by design and may be committed).
-- Published at `https://gwiazda.github.io/kraken/` (Vite `base: '/kraken/'`). The CSP is a `<meta>` tag in `index.html`.
+- Published at `https://gwiazda.github.io/Kraken/` (capital K, the repo name). Vite `base: './'` (relative links) so letter case does not matter. The CSP is a `<meta>` tag in `index.html`.
 
 ## Commands
 - `npm install`: once after cloning, and after `package.json` changes.
-- `npm run dev`: local test server at **http://localhost:5173/kraken/** (fixed port; it is an OAuth origin). The Live Server extension is not used.
+- `npm run dev`: local test server at **http://localhost:5173/** (fixed port; it is an OAuth origin). The Live Server extension is not used.
 - `npm run build`: type check (`tsc`) and build to `dist/`. `npm run typecheck`: type check only.
 
 ## Working process

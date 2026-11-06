@@ -14,7 +14,7 @@ Snapshot of where work stopped. Rewritten at the end of each session; see `CLAUD
 
 ## In progress
 - Owner to merge the Vite setup PR, then turn on GitHub Pages: repo **Settings → Pages → Source: GitHub Actions**.
-  Then check that `https://gwiazda.github.io/kraken/` shows the placeholder page.
+  Then check that `https://gwiazda.github.io/Kraken/` shows the placeholder page.
 
 ## Next steps
 1. Google Cloud setup with the owner, step by step: project, Sheets API, Drive API, Picker API, OAuth consent screen
